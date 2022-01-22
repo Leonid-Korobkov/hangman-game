@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Виселица!</title>
+</head>
+
+<body>
+    <h1>Виселица!</h1>
+    <script>
+        // Создаем массив со словами
+        let words = [
+            // "программа",
+            "макака",
+            // "прекрасный",
+            // "оладушек",
+            // 'марковка',
+            // "шоколад",
+            // "конфета",
+            // "крокодил",
+            // "программирование",
+            // "функция"
+        ];
+        // Выбираем случайное слово
+        let word = words[Math.floor(Math.random() * words.length)];
+        // Создаем итоговый массив
+        let answerArray = [];
+        for (let i = 0; i < word.length; i++) {
+            answerArray[i] = "_";
+        }
+        let remainingLetters = word.length;
+        let countTry = 0
+        let howManyAttempts = word.length
+        // Игровой цикл
+        while (remainingLetters > 0 && countTry < word.length) {
+            // Показываем состояние игры 
+            alert(answerArray.join(" "));
+
+            // Запрашиваем вариант ответа
+            let guess = prompt(`Угадайте букву, или нажмите Отмена для выхода из игры. \n У вас осталось ${howManyAttempts} попыток`);
+            guess = guess.toLowerCase()
+            if (guess === null) {
+                // Выходим из игрового цикла
+                break;
+            } else if (guess.length !== 1) {
+                alert("Пожалуйста, введите одиночную букву.");
+            } else {
+                // Обновляем состояние игры
+                for (let j = 0; j < word.length; j++) {
+                    if (word[j] === guess) {
+                        answerArray[j] = guess;
+                        remainingLetters--;
+                    }
+                }
+            }
+            howManyAttempts--
+            countTry++
+            // Конец игрового цикла
+        }
+        // Отображаем ответ и поздравляем игрока
+        if (remainingLetters === 0) {
+            alert(answerArray.join(" "));
+            alert("Отлично! Было загадано слово " + word);
+        } else {
+            alert('Ваши попытки закончились, было загадано слово ' + word)
+        }
+    </script>
+</body>
+
+</html>
